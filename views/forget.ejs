@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Sign Up</title>
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  section {
+    position: relative;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.685);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  section .container {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  section .container .user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  section .container .user .imgBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: #ff0;
+    transition: 0.5s;
+  }
+
+  section .container .user .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  section .container .user .formBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    transition: 0.5s;
+  }
+
+  section .container .user .formBx div h2 {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  section .container .user .formBx div input {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    background: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+
+  section .container .user .formBx div input[type='submit'] {
+    max-width: 162px;
+    background: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.5s;
+  }
+
+  section .container .user .formBx div .signup {
+    position: relative;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  section .container .user .formBx div .signup a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #677eff;
+  }
+
+  section .container .signupBx {
+    pointer-events: none;
+  }
+
+  section .container.active .signupBx {
+    pointer-events: initial;
+  }
+
+  section .container .signupBx .formBx {
+    left: 100%;
+  }
+
+  section .container.active .signupBx .formBx {
+    left: 0;
+  }
+
+  section .container .signupBx .imgBx {
+    left: -100%;
+  }
+
+  section .container.active .signupBx .imgBx {
+    left: 0%;
+  }
+
+  section .container .signinBx .formBx {
+    left: 0%;
+  }
+
+  section .container.active .signinBx .formBx {
+    left: 100%;
+  }
+
+  section .container .signinBx .imgBx {
+    left: 0%;
+  }
+
+  section .container.active .signinBx .imgBx {
+    left: -100%;
+  }
+
+  @media (max-width: 991px) {
+    section .container {
+      max-width: 400px;
+    }
+
+    section .container .imgBx {
+      display: none;
+    }
+
+    section .container .user .formBx {
+      width: 100%;
+    }
+  }
+
+  .feedback {
+    color: red;
+    font-size: 10px;
+    display: none;
+  }
+
+  #signupbtn,
+  #loginbtn {
+    background: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.5s;
+    position: relative;
+    width: 42%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: none;
+  }
+
+  .verifybox,
+  .verifybtn,
+  .passwordbox,
+  .passwordbtn {
+    display: none;
+  }
+
+  #loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 3px solid black;
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+  }
+
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+</style>
+
+<body>
+  <section>
+    <div class="container">
+      <div class="user signinBx">
+        <div class="imgBx"><img
+            src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg"
+            alt="" /></div>
+        <div class="formBx">
+          <div>
+            <h2>Forget Password</h2>
+            <input class="emailbox" type="text" id="email1" placeholder="Email" />
+            <input class="emailbtn" type="submit" onclick="forget()" id="loginsubmitbtn1" value="Send Code " />
+            <input class="verifybox" type="text" id="code1" placeholder="Enter code" />
+            <input class="verifybtn" type="submit" onclick="verify()" id="loginsubmitbtn2" value="Verify Code " />
+            <input class="passwordbox" type="text" id="newpassword1" placeholder="Enter New Password" />
+            <input class="passwordbtn" type="submit" onclick="newpassword()" id="loginsubmitbtn3"
+              value="Change Password" />
+            <p class="signup">
+              Already have an account ?
+              <a href="/">Login in.</a>
+            </p>
+            <p class="signup">
+              Don't have an account ?
+              <a href="/">Sign Up.</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/assets/js/firebase.js"></script>
+<script>
+  async function forget() {
+    var email = document.getElementById("email1").value;
+    document.getElementById("email1").style.display = "none";
+    document.getElementById("loginsubmitbtn1").style.display = "none";
+    document.getElementById("code1").style.display = "block";
+    document.getElementById("loginsubmitbtn2").style.display = "block";
+    console.log(email)
+    if (email != "" && email != null) {
+      var forget = await axios.post("/mail/forget", { forgetemail: email }).then((res) => { return res.data })
+      console.log(forget)
+    }
+
+    else {
+
+      alert("Please enter email")
+    }
+  }
+  async function verify() {
+    var email = document.getElementById("code1").value;
+    document.getElementById("code1").style.display = "none";
+    document.getElementById("loginsubmitbtn2").style.display = "none";
+    document.getElementById("newpassword1").style.display = "block";
+    document.getElementById("loginsubmitbtn3").style.display = "block";
+    console.log(email)
+    if (email != "" && email != null) {
+      var forget = await axios.post("/mail/verify", { OTP: email }).then((res) => { return res.data })
+      console.log(forget)
+    }
+
+    else {
+
+      alert("Please enter email")
+    }
+  }
+  async function newpassword() {
+    var email = document.getElementById("email1").value;
+    var password = document.getElementById("newpassword1").value;
+    console.log(password)
+    var forget = await axios.post("/auth/updatepswd", { email: email, password : password}).then((res) => { return res.data })
+    console.log(forget)
+    if (forget == true) {
+    window.location.replace("/")
+  }else{
+    alert("please check password")
+  }
+  }
+</script>
+<script>
+
+  var userid = localStorage.getItem("userid")
+  if (userid !== null) {
+    window.location.replace("/upload")
+  }
+</script>
+
+</html>

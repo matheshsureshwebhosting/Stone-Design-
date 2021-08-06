@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  section .container {
+    position: relative;
+    width: 800px;
+    height: 1100px;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  section .container .user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  section .container .user .imgBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: #ff0;
+    transition: 0.5s;
+  }
+
+  section .container .user .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  section .container .user .formBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    transition: 0.5s;
+  }
+
+  section .container .user .formBx div h2 {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  section .container .user .formBx div input {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    background: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+
+  section .container .user .formBx div input[type='submit'] {
+    max-width: 100px;
+    background: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.5s;
+  }
+
+  section .container .user .formBx div .signup {
+    position: relative;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  section .container .user .formBx div .signup a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #677eff;
+  }
+
+  section .container .signupBx {
+    pointer-events: none;
+  }
+
+  section .container.active .signupBx {
+    pointer-events: initial;
+  }
+
+  section .container .signupBx .formBx {
+    left: 100%;
+  }
+
+  section .container.active .signupBx .formBx {
+    left: 0;
+  }
+
+  section .container .signupBx .imgBx {
+    left: -100%;
+  }
+
+  section .container.active .signupBx .imgBx {
+    left: 0%;
+  }
+
+  section .container .signinBx .formBx {
+    left: 0%;
+  }
+
+  section .container.active .signinBx .formBx {
+    left: 100%;
+  }
+
+  section .container .signinBx .imgBx {
+    left: 0%;
+  }
+
+  section .container.active .signinBx .imgBx {
+    left: -100%;
+  }
+
+
+  section .container .imgBx {
+    display: none;
+  }
+
+  section .container .user .formBx {
+    width: 100%;
+  }
+
+  textarea {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    background: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+
+  #logo {
+    /* margin-left: 245px;
+    margin-top: 60px; */
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width:650px) {
+    #logo {
+      margin-left: 36px;
+      margin-top: 60px;
+      margin-bottom: 20px;
+    }
+  }
+
+  #uploadbtn {
+    background: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.5s;
+    position: relative;
+    width: 18%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: none;
+  }
+
+  #loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 3px solid black;
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+  }
+
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  .btn-outline-success {
+    color: #EA531E;
+    border-color: #EA531E;
+    margin-left: 16px;
+  }
+</style>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand"> <img id="logo" src="http://www.stonedesigncountertops.com/2015/img/logo.png" alt=""></a>
+      <form class="d-flex">
+        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <a href="/dashboard" class="btn btn-outline-success ml-5" id="dashboard"
+          style="margin-left: 16px;">Dashboard</a>
+          <a href="/uploadfile" class="btn btn-outline-success">Submitted Request</a>
+        <a href="#" class="btn btn-outline-success" id="logout" onclick="logout()">Logout</a>
+      </form>
+    </div>
+  </nav>
+  <section>
+
+    <div class="container">
+
+      <div class="user signinBx">
+        <div class="formBx">
+          <div>
+
+            <h2>Registation Form</h2>
+            <label>Image</label>
+            <input type="file" id='file' accept="image/png, image/jpeg" />
+            <label>Name</label>
+            <input type="text" id='name' placeholder="Name" />
+            <label>Date</label>
+            <input type="date" id='date' placeholder="Date" />
+            <label>Email</label>
+            <input type="text" id='email' placeholder="Email" />
+            <label>Phone</label>
+            <input type="text" id='phone' placeholder="Phone" />
+            <label>Address</label>
+            <textarea name="address" placeholder="Address" id="address" cols="30" rows="4"></textarea>
+            <label>Referrals</label>
+            <input type="text" name="referrals" placeholder="Referrals" id="referrals"></input>
+            <label>Remarks</label>
+            <input type="text" id='remark' placeholder="Remarks" maxlength="100" />
+            <label>Description of Job (Kitchen, Bath, etc..)</label>
+            <textarea name="description" id="description" placeholder="Description" cols="30" rows="4"></textarea>
+            <input type="submit" onclick="upload()" value="Upload" id="submitbtn" />
+            <button type="submit" value="Upload" disabled id="uploadbtn"><span
+                id="loading"></span><span>Uploading</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase.js"></script>
+<script src="/assets/js/firebase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  var userid = localStorage.getItem("userid")
+  if (userid === null) {
+    window.location.replace("/")
+  }
+
+
+  function logout() {
+    localStorage.removeItem("userid")
+    localStorage.removeItem("role")
+    window.location.replace("/")
+  }
+</script>
+<script src="/assets/js/upload.js"></script>
+
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register User List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+
+  }
+
+  .tbl-header {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .tbl-content {
+    height: 300px;
+    overflow-x: auto;
+    margin-top: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  th {
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+  }
+
+  #signupbtn {
+    display: none;
+  }
+
+  #fbname {
+    display: none;
+  }
+
+  #fbemail {
+    display: none;
+  }
+
+  #fbpassword {
+    display: none;
+  }
+
+  /* demo styles */
+
+  @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+  #tablebody {
+    background: #C3A3FD;
+    background: #C3A3FD;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  section {
+    margin: 50px;
+  }
+
+  td,
+  th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+
+
+  /* follow me template */
+  .made-with-love {
+    margin-top: 40px;
+    padding: 10px;
+    clear: left;
+    text-align: center;
+    font-size: 10px;
+    font-family: arial;
+    color: black;
+  }
+
+  .made-with-love i {
+    font-style: normal;
+    color: #F50057;
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+  }
+
+  .made-with-love a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .made-with-love a:hover {
+    text-decoration: underline;
+  }
+
+  #addbtn {
+    float: right;
+    margin-bottom: 10px;
+  }
+
+  .rediouser {
+    margin-left: 32px;
+  }
+
+  /* for custom scrollbar for webkit browser*/
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn1 {
+    margin-bottom: 20px !important;
+    text-decoration: n;
+  }
+
+  .btn2,
+  .btn3 {
+    background-color: #0000ff70;
+    width: 45%;
+    border: none;
+    border-radius: 50px;
+  }
+
+  .btn2 {
+    float: right;
+  }
+
+  .modal-title {
+    margin-left: 200px;
+  }
+
+  #submit1 {
+    margin-left: 200px;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
+
+  * {
+    font-family: 'Original Surfer';
+  }
+
+  @media (max-width:650px) {
+    table {
+      width: 319%;
+    }
+  }
+</style>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand"> <img id="logo" src="http://www.stonedesigncountertops.com/2015/img/logo.png" alt=""></a>
+      <form class="d-flex">
+        <a href="#" class="btn btn-outline-success" id="logout" onclick="logout()">Logout</a>
+      </form>
+    </div>
+  </nav>
+  <div className="container">
+    <section>
+      <div className="tbl-header table-responsive">
+        <button type="button" class="btn btn-primary" id="addbtn" data-toggle="modal" data-target="#exampleModal">Add
+          User</button>
+        <table className="table" cellPadding="0" cellSpacing="0" border="1">
+          <thead id="tablebody">
+            <tr>
+              <th>Name</th>
+
+              <th>Email</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="reguserlistdetails">
+
+          </tbody>
+        </table>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <div class="form-group">
+                    <label for="exampleInputName1">Name</label>
+                    <input type="name" class="form-control" id="name" aria-describedby="NameHelp"
+                      placeholder="Enter name">
+                    <div class="feedback" id="fbname">Required Email</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                      placeholder="Enter email">
+                    <div class="feedback" id="fbemail">Required Email</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <div class="feedback" id="fbpassword">Required password</div>
+                  </div>
+                  <!-- <div class="form-group form-check">
+                    <span>
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Admin</label>
+                </span>
+               <span class="rediouser">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                    <label class="form-check-label" for="exampleCheck2">user</label>
+                </span >
+                  </div> -->
+                  <button type="submit" class="btn btn-primary" id="signupsubmitbtn" onclick="signup()">Submit</button>
+                  <button type="submit" class="btn btn-primary" id="signupbtn">Submit</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/assets/js/usertable.js"></script>
+<script src="/assets/js/adminreg.js"></script>
+<script>
+  function logout() {
+    localStorage.removeItem("userid")
+    localStorage.removeItem("role")
+    window.location.replace("/")
+  }
+</script>
+<script>
+  function adduser() {
+    window.location.replace("/")
+  }
+  var userid = localStorage.getItem("userid")
+  if (userid === null) {
+    window.location.replace("/")
+  }
+</script>
+
+</html>
